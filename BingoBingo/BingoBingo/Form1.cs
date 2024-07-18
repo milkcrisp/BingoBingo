@@ -14,16 +14,32 @@ namespace BingoBingo
     {
         private List<Label> numberLabels;
         private List<int> userNumbers;
+        private List<int> UserselectedNumbers = new List<int>(); // 儲存使用者選擇的號碼
         private NumberGenerator numberGenerator;
-        private UserInputParser userInputParser;
         private UIHelper uiHelper;
+        private TableLayoutPanel openLayoutPanel;  // 改為不同的名稱
+        private TableLayoutPanel chooseLayoutPanel;  // 改為不同的名稱
         public Form1()
         {
             InitializeComponent();
-            InitializeNumberLabels();
+            InitializeNumberLabels();  // 呼叫這個方法來初始化 numberLabels
             numberGenerator = new NumberGenerator();
-            userInputParser = new UserInputParser();
+
             uiHelper = new UIHelper();
+
+            // 初始化 openLayoutPanel
+            openLayoutPanel = new TableLayoutPanel();
+            openLayoutPanel.Name = "openLayoutPanel"; // 可選：設定名稱
+            openLayoutPanel.Dock = DockStyle.Fill;
+            Controls.Add(openLayoutPanel); // 加入到表單的 Controls 集合中
+
+            // 初始化 chooseLayoutPanel
+            chooseLayoutPanel = new TableLayoutPanel();
+            chooseLayoutPanel.Name = "chooseLayoutPanel"; // 可選：設定名稱
+            chooseLayoutPanel.Dock = DockStyle.Fill;
+            Controls.Add(chooseLayoutPanel); // 加入到表單的 Controls 集合中
+
+            //生成按鈕
             var roundButton = new RoundButton
             {
                 Text = "圓形按鈕",
@@ -33,7 +49,7 @@ namespace BingoBingo
             this.Controls.Add(roundButton);
         }
 
-
+        
         private void InitializeNumberLabels()
         {
             numberLabels = new List<Label>();
@@ -45,19 +61,27 @@ namespace BingoBingo
                 label.Text = i.ToString();
                 label.Dock = DockStyle.Fill;
                 label.TextAlign = ContentAlignment.MiddleCenter;
-                lbllayout_numberLabels.Controls.Add(label);
+                openTableLayoutPanel.Controls.Add(label);
                 numberLabels.Add(label);
             }
         }
 
         private void btn_open(object sender, EventArgs e)
         {
-            if (userNumbers == null || userNumbers.Count == 0)
+            // 顯示openTableLayoutPanel，隱藏chooseTableLayoutPanel
+            openTableLayoutPanel.Visible = true;
+            chooseTableLayoutPanel.Visible = false;
+
+            if (UserselectedNumbers == null || UserselectedNumbers.Count == 0)
             {
                 MessageBox.Show("請先輸入號碼並按確認按鈕。");
                 return;
             }
-
+            // 清空先前的開獎號碼
+            foreach (Label label in numberLabels)
+            {
+                label.BackColor = SystemColors.Control;
+            }
             List<int> selectedNumbers = numberGenerator.GenerateNumbers(1, 80, 20);
             // 更新顯示的數字，標記被選中的號碼
             int lastIndex = selectedNumbers.Count - 1; // 取得最後一個選中的數字的索引
@@ -92,74 +116,61 @@ namespace BingoBingo
             {
                 lbl_OddOrEven.Text = "猜單雙的結果為：中間值";
             }
-
+            // 看有沒有中獎
             List<int> matchedNumbers = userNumbers.Intersect(selectedNumbers).ToList();
-            if (matchedNumbers.Count > 0)
+
+            var formattedMatchedNumbers = matchedNumbers.Select(n => n < 10 ? $"0{n}" : n.ToString()).ToList();
+            var matchedNumbersText = new StringBuilder("中獎號碼:\n");
+
+            for (int i = 0; i < formattedMatchedNumbers.Count; i++)
             {
-                lbl_result.Text = $"中獎號碼: {string.Join(", ", matchedNumbers)}";
+                matchedNumbersText.Append(formattedMatchedNumbers[i] + " ");
+                if ((i + 1) % 5 == 0) matchedNumbersText.Append("\n");
             }
-            else
+
+            lbl_result.Text = matchedNumbersText.ToString();
+            // 顯示開獎號碼
+            // 格式化開獎號碼並分行顯示
+            var formattedNumbers = selectedNumbers.Select(n => n < 10 ? $"0{n}" : n.ToString()).ToList();
+            var displayText = new StringBuilder("開獎號碼:\n");
+
+            for (int i = 0; i < formattedNumbers.Count; i++)
             {
-                lbl_result.Text = "沒有中獎號碼";
+                displayText.Append(formattedNumbers[i] + " ");
+                if ((i + 1) % 5 == 0) displayText.Append("\n");
             }
+
+            lbl_openNumbers.Text = displayText.ToString();
+
         }
 
-        private void lbl_BigOrSmall_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void rBtn_InputNo_Click(object sender, EventArgs e)
-        {
-            string input = txtBox_Input.Text;
-            userNumbers = userInputParser.ParseUserInput(input);
-
-            if (userNumbers == null || userNumbers.Count == 0)
-            {
-                MessageBox.Show("請輸入 1 到 10 個不重複的數字（1 到 80）。");
-                return;
-            }
-            string userNumbersText = $"你的選號：\n";
-            if (userNumbers.Count > 5)
-            {
-                userNumbersText += string.Join(", ", userNumbers.Take(5)) + "\n";
-                userNumbersText += string.Join(", ", userNumbers.Skip(5));
-            }
-            else
-            {
-                userNumbersText += string.Join(", ", userNumbers);
-            }
-
-            lbl_yourInput.Text = userNumbersText;
-            MessageBox.Show($"您選擇的號碼是: {string.Join(", ", userNumbers)}");
-        }
-
-        private List<int> UserselectedNumbers = new List<int>(); // 儲存使用者選擇的號碼
         private void rBtn_choose_Click(object sender, EventArgs e)
         {
-            // 清空號碼
-            UserselectedNumbers.Clear();
+            userNumbers = new List<int>();
+            UserselectedNumbers = new List<int>();
             lbl_yourInput.Text = $"你的選號：\n";
+            // 清空 chooseTableLayoutPanel 中的所有控制項
+            chooseTableLayoutPanel.Controls.Clear();
+            chooseTableLayoutPanel.RowStyles.Clear();
+            chooseTableLayoutPanel.ColumnStyles.Clear();
 
-            lbllayout_numberLabels.Controls.Clear();
-            lbllayout_numberLabels.RowStyles.Clear();
-            lbllayout_numberLabels.ColumnStyles.Clear();
-
-            // 設置 TableLayoutPanel 的行和列
-            lbllayout_numberLabels.ColumnCount = 10;
-            lbllayout_numberLabels.RowCount = 8;
+            // 設置 chooseTableLayoutPanel 的行和列
+            chooseTableLayoutPanel.ColumnCount = 10;
+            chooseTableLayoutPanel.RowCount = 8;
 
             // 設置每列和每行的大小
             for (int i = 0; i < 10; i++)
             {
-                lbllayout_numberLabels.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+                chooseTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
             }
             for (int i = 0; i < 8; i++)
             {
-                lbllayout_numberLabels.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
+                chooseTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
             }
 
-            // 填充 TableLayoutPanel 中的號碼按鈕
+            // 填充 chooseTableLayoutPanel 中的號碼按鈕
             int number = 1;
             for (int row = 0; row < 8; row++)
             {
@@ -171,16 +182,19 @@ namespace BingoBingo
                         btnNumber.Text = number.ToString();
                         btnNumber.Dock = DockStyle.Fill;
                         btnNumber.Margin = new Padding(5);
-                        btnNumber.Click += BtnNumberForSelection_Click; // 添加點擊事件
+                        btnNumber.Click += BtnNumberForSelection_Click; // 添加點擊事件處理程序
 
-                        lbllayout_numberLabels.Controls.Add(btnNumber, col, row);
+                        chooseTableLayoutPanel.Controls.Add(btnNumber, col, row);
                         number++;
                     }
                 }
             }
+            // 顯示chooseTableLayoutPanel，隱藏openTableLayoutPanel
+            chooseTableLayoutPanel.Visible = true;
+            openTableLayoutPanel.Visible = false;
         }
        
-
+        //這裡是點我選號的時候 按按鈕選擇號碼
         private void BtnNumberForSelection_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
@@ -217,16 +231,41 @@ namespace BingoBingo
 
         private void UpdateSelectedNumbersDisplay()
         {
-            lbl_yourInput.Text = $"你的選號：\n";
-            if (UserselectedNumbers.Count > 5)
+            var formattedUserNumbers = UserselectedNumbers.Select(n => n < 10 ? $"0{n}" : n.ToString()).ToList();
+            var userNumbersText = new StringBuilder("你的選號:\n");
+
+            for (int i = 0; i < formattedUserNumbers.Count; i++)
             {
-                lbl_yourInput.Text += string.Join(", ", UserselectedNumbers.Take(5)) + "\n";
-                lbl_yourInput.Text += string.Join(", ", UserselectedNumbers.Skip(5));
+                userNumbersText.Append(formattedUserNumbers[i] + " ");
+                if ((i + 1) % 5 == 0) userNumbersText.Append("\n");
             }
-            else
+
+            lbl_yourInput.Text = userNumbersText.ToString();
+            // 更新 userNumbers 列表
+            userNumbers = new List<int>(UserselectedNumbers);
+        }
+        // 點我確認所選號碼
+        private void btnConfirmSelection_Click(object sender, EventArgs e)
+        {
+            if (UserselectedNumbers.Count == 0)
             {
-                lbl_yourInput.Text += string.Join(", ", UserselectedNumbers);
+                MessageBox.Show("請先選擇號碼後再確認。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
+
+            // 如果有選擇號碼，顯示使用者所選的號碼
+            MessageBox.Show($"您選擇了號碼: {string.Join(", ", UserselectedNumbers)}", "確認選號結果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // 將選擇的號碼存儲到 userNumbers 中，以便開獎使用
+            userNumbers = new List<int>(UserselectedNumbers);
+            // 清空先前的開獎號碼
+            foreach (Label label in numberLabels)
+            {
+                label.ForeColor = SystemColors.ControlText;
+                label.Font = new Font(label.Font, FontStyle.Regular);
+                label.BackColor = Color.White;
+            }
+
         }
 
     }

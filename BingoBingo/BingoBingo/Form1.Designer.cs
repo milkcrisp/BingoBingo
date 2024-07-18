@@ -29,11 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtBox_Input = new System.Windows.Forms.TextBox();
-            this.txtBox_inputsuperNo = new System.Windows.Forms.TextBox();
-            this.txtBox_BigorSmall = new System.Windows.Forms.TextBox();
-            this.txtBox_OddorEVEN = new System.Windows.Forms.TextBox();
-            this.lbllayout_numberLabels = new System.Windows.Forms.TableLayoutPanel();
+            this.openTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -43,13 +39,18 @@
             this.lbl_BigOrSmall = new System.Windows.Forms.Label();
             this.lbl_superNo = new System.Windows.Forms.Label();
             this.lbl_result = new System.Windows.Forms.Label();
+            this.txtBox_OddorEVEN = new System.Windows.Forms.TextBox();
+            this.txtBox_BigorSmall = new System.Windows.Forms.TextBox();
+            this.txtBox_inputsuperNo = new System.Windows.Forms.TextBox();
+            this.chooseTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.lbl_openNumbers = new System.Windows.Forms.Label();
+            this.btnConfirmSelection = new BingoBingo.RoundButton();
+            this.rBtn_choose = new BingoBingo.RoundButton();
             this.roundButton4 = new BingoBingo.RoundButton();
             this.roundButton3 = new BingoBingo.RoundButton();
             this.roundButton2 = new BingoBingo.RoundButton();
-            this.rBtn_InputNo = new BingoBingo.RoundButton();
             this.roundButton6 = new BingoBingo.RoundButton();
             this.roundButton5 = new BingoBingo.RoundButton();
-            this.rBtn_choose = new BingoBingo.RoundButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -68,77 +69,33 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "BINGO BINGO賓果賓果";
             // 
-            // txtBox_Input
+            // openTableLayoutPanel
             // 
-            this.txtBox_Input.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtBox_Input.Location = new System.Drawing.Point(12, 63);
-            this.txtBox_Input.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBox_Input.Name = "txtBox_Input";
-            this.txtBox_Input.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBox_Input.Size = new System.Drawing.Size(240, 43);
-            this.txtBox_Input.TabIndex = 7;
-            this.txtBox_Input.Text = "請輸入選號";
-            // 
-            // txtBox_inputsuperNo
-            // 
-            this.txtBox_inputsuperNo.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtBox_inputsuperNo.Location = new System.Drawing.Point(12, 240);
-            this.txtBox_inputsuperNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBox_inputsuperNo.Name = "txtBox_inputsuperNo";
-            this.txtBox_inputsuperNo.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBox_inputsuperNo.Size = new System.Drawing.Size(240, 43);
-            this.txtBox_inputsuperNo.TabIndex = 8;
-            this.txtBox_inputsuperNo.Text = "請輸入超級選號";
-            // 
-            // txtBox_BigorSmall
-            // 
-            this.txtBox_BigorSmall.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtBox_BigorSmall.Location = new System.Drawing.Point(12, 410);
-            this.txtBox_BigorSmall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBox_BigorSmall.Name = "txtBox_BigorSmall";
-            this.txtBox_BigorSmall.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBox_BigorSmall.Size = new System.Drawing.Size(240, 43);
-            this.txtBox_BigorSmall.TabIndex = 9;
-            this.txtBox_BigorSmall.Text = "請輸入大或小";
-            // 
-            // txtBox_OddorEVEN
-            // 
-            this.txtBox_OddorEVEN.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtBox_OddorEVEN.Location = new System.Drawing.Point(12, 570);
-            this.txtBox_OddorEVEN.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBox_OddorEVEN.Name = "txtBox_OddorEVEN";
-            this.txtBox_OddorEVEN.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBox_OddorEVEN.Size = new System.Drawing.Size(240, 43);
-            this.txtBox_OddorEVEN.TabIndex = 10;
-            this.txtBox_OddorEVEN.Text = "請輸入單或雙";
-            // 
-            // lbllayout_numberLabels
-            // 
-            this.lbllayout_numberLabels.BackColor = System.Drawing.SystemColors.Window;
-            this.lbllayout_numberLabels.ColumnCount = 8;
-            this.lbllayout_numberLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.lbllayout_numberLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.lbllayout_numberLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.lbllayout_numberLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.lbllayout_numberLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.lbllayout_numberLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.lbllayout_numberLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.lbllayout_numberLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.lbllayout_numberLabels.Location = new System.Drawing.Point(495, 201);
-            this.lbllayout_numberLabels.Name = "lbllayout_numberLabels";
-            this.lbllayout_numberLabels.RowCount = 10;
-            this.lbllayout_numberLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.lbllayout_numberLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.lbllayout_numberLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.lbllayout_numberLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.lbllayout_numberLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.lbllayout_numberLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.lbllayout_numberLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.lbllayout_numberLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.lbllayout_numberLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.lbllayout_numberLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.lbllayout_numberLabels.Size = new System.Drawing.Size(590, 449);
-            this.lbllayout_numberLabels.TabIndex = 1;
+            this.openTableLayoutPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.openTableLayoutPanel.ColumnCount = 8;
+            this.openTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.openTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.openTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.openTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.openTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.openTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.openTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.openTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.openTableLayoutPanel.Location = new System.Drawing.Point(463, 95);
+            this.openTableLayoutPanel.Name = "openTableLayoutPanel";
+            this.openTableLayoutPanel.RowCount = 10;
+            this.openTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.openTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.openTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.openTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.openTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.openTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.openTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.openTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.openTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.openTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.openTableLayoutPanel.Size = new System.Drawing.Size(671, 560);
+            this.openTableLayoutPanel.TabIndex = 1;
             // 
             // panel1
             // 
@@ -153,12 +110,11 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel2.Controls.Add(this.btnConfirmSelection);
             this.panel2.Controls.Add(this.rBtn_choose);
             this.panel2.Controls.Add(this.roundButton4);
             this.panel2.Controls.Add(this.roundButton3);
             this.panel2.Controls.Add(this.roundButton2);
-            this.panel2.Controls.Add(this.rBtn_InputNo);
-            this.panel2.Controls.Add(this.txtBox_Input);
             this.panel2.Controls.Add(this.txtBox_OddorEVEN);
             this.panel2.Controls.Add(this.txtBox_inputsuperNo);
             this.panel2.Controls.Add(this.txtBox_BigorSmall);
@@ -174,9 +130,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(111)))));
+            this.panel3.Controls.Add(this.chooseTableLayoutPanel);
             this.panel3.Controls.Add(this.roundButton6);
             this.panel3.Controls.Add(this.roundButton5);
-            this.panel3.Controls.Add(this.lbllayout_numberLabels);
+            this.panel3.Controls.Add(this.openTableLayoutPanel);
             this.panel3.Font = new System.Drawing.Font("微軟正黑體", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
@@ -186,6 +143,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel4.Controls.Add(this.lbl_openNumbers);
             this.panel4.Controls.Add(this.lbl_yourInput);
             this.panel4.Controls.Add(this.lbl_OddOrEven);
             this.panel4.Controls.Add(this.lbl_BigOrSmall);
@@ -242,17 +200,115 @@
             // 
             this.lbl_result.AutoSize = true;
             this.lbl_result.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.lbl_result.Location = new System.Drawing.Point(35, 496);
+            this.lbl_result.Location = new System.Drawing.Point(35, 619);
             this.lbl_result.Name = "lbl_result";
             this.lbl_result.Size = new System.Drawing.Size(127, 36);
             this.lbl_result.TabIndex = 21;
             this.lbl_result.Text = "中獎結果";
             // 
+            // txtBox_OddorEVEN
+            // 
+            this.txtBox_OddorEVEN.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtBox_OddorEVEN.Location = new System.Drawing.Point(12, 541);
+            this.txtBox_OddorEVEN.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtBox_OddorEVEN.Name = "txtBox_OddorEVEN";
+            this.txtBox_OddorEVEN.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBox_OddorEVEN.Size = new System.Drawing.Size(240, 43);
+            this.txtBox_OddorEVEN.TabIndex = 10;
+            this.txtBox_OddorEVEN.Text = "請輸入單或雙";
+            // 
+            // txtBox_BigorSmall
+            // 
+            this.txtBox_BigorSmall.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtBox_BigorSmall.Location = new System.Drawing.Point(12, 365);
+            this.txtBox_BigorSmall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtBox_BigorSmall.Name = "txtBox_BigorSmall";
+            this.txtBox_BigorSmall.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBox_BigorSmall.Size = new System.Drawing.Size(240, 43);
+            this.txtBox_BigorSmall.TabIndex = 9;
+            this.txtBox_BigorSmall.Text = "請輸入大或小";
+            // 
+            // txtBox_inputsuperNo
+            // 
+            this.txtBox_inputsuperNo.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtBox_inputsuperNo.Location = new System.Drawing.Point(12, 204);
+            this.txtBox_inputsuperNo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtBox_inputsuperNo.Name = "txtBox_inputsuperNo";
+            this.txtBox_inputsuperNo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBox_inputsuperNo.Size = new System.Drawing.Size(240, 43);
+            this.txtBox_inputsuperNo.TabIndex = 8;
+            this.txtBox_inputsuperNo.Text = "請輸入超級選號";
+
+            // 
+            // chooseTableLayoutPanel
+            // 
+            this.chooseTableLayoutPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.chooseTableLayoutPanel.ColumnCount = 8;
+            this.chooseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.chooseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.chooseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.chooseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.chooseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.chooseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.chooseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.chooseTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.chooseTableLayoutPanel.Location = new System.Drawing.Point(463, 95);
+            this.chooseTableLayoutPanel.Name = "chooseTableLayoutPanel";
+            this.chooseTableLayoutPanel.RowCount = 10;
+            this.chooseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.chooseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.chooseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.chooseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.chooseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.chooseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.chooseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.chooseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.chooseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.chooseTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.chooseTableLayoutPanel.Size = new System.Drawing.Size(671, 560);
+            this.chooseTableLayoutPanel.TabIndex = 17;
+            // 
+            // lbl_openNumbers
+            // 
+            this.lbl_openNumbers.AutoSize = true;
+            this.lbl_openNumbers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lbl_openNumbers.Location = new System.Drawing.Point(35, 430);
+            this.lbl_openNumbers.Name = "lbl_openNumbers";
+            this.lbl_openNumbers.Size = new System.Drawing.Size(155, 36);
+            this.lbl_openNumbers.TabIndex = 24;
+            this.lbl_openNumbers.Text = "開獎號碼：";
+            // 
+            // btnConfirmSelection
+            // 
+            this.btnConfirmSelection.BackColor = System.Drawing.Color.White;
+            this.btnConfirmSelection.FlatAppearance.BorderSize = 0;
+            this.btnConfirmSelection.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnConfirmSelection.Location = new System.Drawing.Point(274, 24);
+            this.btnConfirmSelection.Name = "btnConfirmSelection";
+            this.btnConfirmSelection.Size = new System.Drawing.Size(131, 131);
+            this.btnConfirmSelection.TabIndex = 16;
+            this.btnConfirmSelection.Text = "確認選號";
+            this.btnConfirmSelection.UseVisualStyleBackColor = false;
+            this.btnConfirmSelection.Click += new System.EventHandler(this.btnConfirmSelection_Click);
+            // 
+            // rBtn_choose
+            // 
+            this.rBtn_choose.BackColor = System.Drawing.Color.White;
+            this.rBtn_choose.FlatAppearance.BorderSize = 0;
+            this.rBtn_choose.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rBtn_choose.Location = new System.Drawing.Point(46, 24);
+            this.rBtn_choose.Name = "rBtn_choose";
+            this.rBtn_choose.Size = new System.Drawing.Size(131, 131);
+            this.rBtn_choose.TabIndex = 15;
+            this.rBtn_choose.Text = "點我選號";
+            this.rBtn_choose.UseVisualStyleBackColor = false;
+            this.rBtn_choose.Click += new System.EventHandler(this.rBtn_choose_Click);
+            // 
             // roundButton4
             // 
             this.roundButton4.FlatAppearance.BorderSize = 0;
             this.roundButton4.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.roundButton4.Location = new System.Drawing.Point(274, 554);
+            this.roundButton4.Location = new System.Drawing.Point(274, 541);
             this.roundButton4.Name = "roundButton4";
             this.roundButton4.Size = new System.Drawing.Size(131, 131);
             this.roundButton4.TabIndex = 14;
@@ -274,32 +330,19 @@
             // 
             this.roundButton2.FlatAppearance.BorderSize = 0;
             this.roundButton2.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.roundButton2.Location = new System.Drawing.Point(274, 195);
+            this.roundButton2.Location = new System.Drawing.Point(274, 184);
             this.roundButton2.Name = "roundButton2";
             this.roundButton2.Size = new System.Drawing.Size(131, 131);
             this.roundButton2.TabIndex = 12;
             this.roundButton2.Text = "超級選號";
             this.roundButton2.UseVisualStyleBackColor = true;
             // 
-            // rBtn_InputNo
-            // 
-            this.rBtn_InputNo.BackColor = System.Drawing.Color.White;
-            this.rBtn_InputNo.FlatAppearance.BorderSize = 0;
-            this.rBtn_InputNo.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rBtn_InputNo.Location = new System.Drawing.Point(274, 18);
-            this.rBtn_InputNo.Name = "rBtn_InputNo";
-            this.rBtn_InputNo.Size = new System.Drawing.Size(131, 131);
-            this.rBtn_InputNo.TabIndex = 11;
-            this.rBtn_InputNo.Text = "點我選號";
-            this.rBtn_InputNo.UseVisualStyleBackColor = false;
-            this.rBtn_InputNo.Click += new System.EventHandler(this.rBtn_InputNo_Click);
-            // 
             // roundButton6
             // 
             this.roundButton6.FlatAppearance.BorderSize = 0;
             this.roundButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.roundButton6.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.roundButton6.Location = new System.Drawing.Point(532, 677);
+            this.roundButton6.Location = new System.Drawing.Point(482, 690);
             this.roundButton6.Name = "roundButton6";
             this.roundButton6.Size = new System.Drawing.Size(131, 131);
             this.roundButton6.TabIndex = 16;
@@ -310,26 +353,13 @@
             // 
             this.roundButton5.FlatAppearance.BorderSize = 0;
             this.roundButton5.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.roundButton5.Location = new System.Drawing.Point(924, 677);
+            this.roundButton5.Location = new System.Drawing.Point(671, 690);
             this.roundButton5.Name = "roundButton5";
             this.roundButton5.Size = new System.Drawing.Size(131, 131);
             this.roundButton5.TabIndex = 15;
             this.roundButton5.Text = "點我開獎";
             this.roundButton5.UseVisualStyleBackColor = true;
             this.roundButton5.Click += new System.EventHandler(this.btn_open);
-            // 
-            // rBtn_choose
-            // 
-            this.rBtn_choose.BackColor = System.Drawing.Color.White;
-            this.rBtn_choose.FlatAppearance.BorderSize = 0;
-            this.rBtn_choose.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rBtn_choose.Location = new System.Drawing.Point(121, 111);
-            this.rBtn_choose.Name = "rBtn_choose";
-            this.rBtn_choose.Size = new System.Drawing.Size(131, 131);
-            this.rBtn_choose.TabIndex = 15;
-            this.rBtn_choose.Text = "點我選號";
-            this.rBtn_choose.UseVisualStyleBackColor = false;
-            this.rBtn_choose.Click += new System.EventHandler(this.rBtn_choose_Click);
             // 
             // Form1
             // 
@@ -359,15 +389,10 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtBox_Input;
-        private System.Windows.Forms.TextBox txtBox_inputsuperNo;
-        private System.Windows.Forms.TextBox txtBox_BigorSmall;
-        private System.Windows.Forms.TextBox txtBox_OddorEVEN;
-        private System.Windows.Forms.TableLayoutPanel lbllayout_numberLabels;
+        private System.Windows.Forms.TableLayoutPanel openTableLayoutPanel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private RoundButton rBtn_InputNo;
         private RoundButton roundButton2;
         private RoundButton roundButton3;
         private RoundButton roundButton4;
@@ -380,6 +405,12 @@
         private System.Windows.Forms.Label lbl_OddOrEven;
         private System.Windows.Forms.Label lbl_yourInput;
         private RoundButton rBtn_choose;
+        private System.Windows.Forms.TextBox txtBox_OddorEVEN;
+        private System.Windows.Forms.TextBox txtBox_inputsuperNo;
+        private System.Windows.Forms.TextBox txtBox_BigorSmall;
+        private System.Windows.Forms.TableLayoutPanel chooseTableLayoutPanel;
+        private RoundButton btnConfirmSelection;
+        private System.Windows.Forms.Label lbl_openNumbers;
     }
 }
 

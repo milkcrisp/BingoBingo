@@ -8,3 +8,13 @@ C:\Users\a1382\Documents\Training\Code\C#\BingoBingo\BingoBingo\obj\Debug\BingoB
 C:\Users\a1382\Documents\Training\Code\C#\BingoBingo\BingoBingo\obj\Debug\BingoBingo.csproj.CoreCompileInputs.cache
 C:\Users\a1382\Documents\Training\Code\C#\BingoBingo\BingoBingo\obj\Debug\BingoBingo.exe
 C:\Users\a1382\Documents\Training\Code\C#\BingoBingo\BingoBingo\obj\Debug\BingoBingo.pdb
+C:\Users\a1382\Documents\GitHub\BingoBingo\BingoBingo\BingoBingo\obj\Debug\BingoBingo.csproj.AssemblyReference.cache
+C:\Users\a1382\Documents\GitHub\BingoBingo\BingoBingo\BingoBingo\obj\Debug\BingoBingo.Form1.resources
+C:\Users\a1382\Documents\GitHub\BingoBingo\BingoBingo\BingoBingo\obj\Debug\BingoBingo.Properties.Resources.resources
+C:\Users\a1382\Documents\GitHub\BingoBingo\BingoBingo\BingoBingo\obj\Debug\BingoBingo.csproj.GenerateResource.cache
+C:\Users\a1382\Documents\GitHub\BingoBingo\BingoBingo\BingoBingo\obj\Debug\BingoBingo.csproj.CoreCompileInputs.cache
+C:\Users\a1382\Documents\GitHub\BingoBingo\BingoBingo\BingoBingo\obj\Debug\BingoBingo.exe
+C:\Users\a1382\Documents\GitHub\BingoBingo\BingoBingo\BingoBingo\obj\Debug\BingoBingo.pdb
+C:\Users\a1382\Documents\GitHub\BingoBingo\BingoBingo\BingoBingo\bin\Debug\BingoBingo.exe.config
+C:\Users\a1382\Documents\GitHub\BingoBingo\BingoBingo\BingoBingo\bin\Debug\BingoBingo.exe
+C:\Users\a1382\Documents\GitHub\BingoBingo\BingoBingo\BingoBingo\bin\Debug\BingoBingo.pdb
