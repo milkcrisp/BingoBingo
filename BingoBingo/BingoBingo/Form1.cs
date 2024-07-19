@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace BingoBingo
 {
     public partial class Form1 : Form
@@ -19,12 +20,23 @@ namespace BingoBingo
         private UIHelper uiHelper;
         private TableLayoutPanel openLayoutPanel;  // 改為不同的名稱
         private TableLayoutPanel chooseLayoutPanel;  // 改為不同的名稱
+        private int superNoInput;
+        private string userOddEvenChoice;
+        private string userBigSmallChoice;
+        private bool isSuperNoSet = false;
+        private bool isBigSmall = false;
+        private bool isOddEven = false;
+        private bool isNumberChosen = false;  // 用來判斷是否已選擇號碼
+        private PrizeManager prizeManager;
+        private int totalPrize = 0; // 新增變數來記錄累積獎金
+
+
         public Form1()
         {
             InitializeComponent();
             InitializeNumberLabels();  // 呼叫這個方法來初始化 numberLabels
             numberGenerator = new NumberGenerator();
-
+            prizeManager = new PrizeManager();  // 初始化 PrizeManager
             uiHelper = new UIHelper();
 
             // 初始化 openLayoutPanel
@@ -48,8 +60,33 @@ namespace BingoBingo
             };
             this.Controls.Add(roundButton);
         }
+        private void Form_Load(object sender, EventArgs e)
+        {
+            superNoInput = 0;
+            // 初始化猜單雙 ComboBox
+            cBox_OddOrEven.Items.Add("單");
+            cBox_OddOrEven.Items.Add("雙");
+            cBox_OddOrEven.SelectedIndex = 0; // 設定預設值
 
-        
+            // 初始化猜大小 ComboBox
+            cBox_BigOrSmall.Items.Add("大");
+            cBox_BigOrSmall.Items.Add("小");
+            cBox_BigOrSmall.SelectedIndex = 0; // 設定預設值
+
+            cBox_computerchoose.Items.Add(1);
+            cBox_computerchoose.Items.Add(2);
+            cBox_computerchoose.Items.Add(3);
+            cBox_computerchoose.Items.Add(4);
+            cBox_computerchoose.Items.Add(5);
+            cBox_computerchoose.Items.Add(6);
+            cBox_computerchoose.Items.Add(7);
+            cBox_computerchoose.Items.Add(8);
+            cBox_computerchoose.Items.Add(9);
+            cBox_computerchoose.Items.Add(10);
+            cBox_computerchoose.SelectedIndex = 0;
+            totalPrize = 0;
+        }
+
         private void InitializeNumberLabels()
         {
             numberLabels = new List<Label>();
@@ -72,9 +109,9 @@ namespace BingoBingo
             openTableLayoutPanel.Visible = true;
             chooseTableLayoutPanel.Visible = false;
 
-            if (UserselectedNumbers == null || UserselectedNumbers.Count == 0)
+            if (!isNumberChosen && !isSuperNoSet && !isBigSmall && !isOddEven)
             {
-                MessageBox.Show("請先輸入號碼並按確認按鈕。");
+                MessageBox.Show("請先選擇玩法。");
                 return;
             }
             // 清空先前的開獎號碼
@@ -87,48 +124,54 @@ namespace BingoBingo
             int lastIndex = selectedNumbers.Count - 1; // 取得最後一個選中的數字的索引
             int lastNumber = selectedNumbers[lastIndex]; // 取得最後一個選中的數字的值
             uiHelper.UpdateLabels(numberLabels, selectedNumbers, lastNumber);
-            
+
             string superNo = Convert.ToString(lastNumber);
             lbl_superNo.Text = $"超級選號： {superNo} 號";
             var (big, small, odd, even) = numberGenerator.AnalyzeNumbers(selectedNumbers);
+            // 判定大小和單雙
+            string bigSmallResult;
             if (big >= 13)
             {
-                lbl_BigOrSmall.Text = "猜大小的結果為：大";
+                bigSmallResult = "大";
             }
             else if (small >= 13)
             {
-                lbl_BigOrSmall.Text = "猜大小的結果為：小";
+                bigSmallResult = "小";
             }
             else
             {
-                lbl_BigOrSmall.Text = "猜大小的結果為：中間值";
+                bigSmallResult = "中間值";
             }
 
+            string oddEvenResult;
             if (odd >= 13)
             {
-                lbl_OddOrEven.Text = "猜單雙的結果為：單";
+                oddEvenResult = "單";
             }
             else if (even >= 13)
             {
-                lbl_OddOrEven.Text = "猜單雙的結果為：雙";
+                oddEvenResult = "雙";
             }
             else
             {
-                lbl_OddOrEven.Text = "猜單雙的結果為：中間值";
+                oddEvenResult = "中間值";
             }
             // 看有沒有中獎
-            List<int> matchedNumbers = userNumbers.Intersect(selectedNumbers).ToList();
-
-            var formattedMatchedNumbers = matchedNumbers.Select(n => n < 10 ? $"0{n}" : n.ToString()).ToList();
-            var matchedNumbersText = new StringBuilder("中獎號碼:\n");
-
-            for (int i = 0; i < formattedMatchedNumbers.Count; i++)
+            if (isNumberChosen)
             {
-                matchedNumbersText.Append(formattedMatchedNumbers[i] + " ");
-                if ((i + 1) % 5 == 0) matchedNumbersText.Append("\n");
-            }
+                List<int> matchedNumbers = userNumbers.Intersect(selectedNumbers).ToList();
 
-            lbl_result.Text = matchedNumbersText.ToString();
+                var formattedMatchedNumbers = matchedNumbers.Select(n => n < 10 ? $"0{n}" : n.ToString()).ToList();
+                var matchedNumbersText = new StringBuilder("中獎號碼:\n");
+
+                for (int i = 0; i < formattedMatchedNumbers.Count; i++)
+                {
+                    matchedNumbersText.Append(formattedMatchedNumbers[i] + " ");
+                    if ((i + 1) % 5 == 0) matchedNumbersText.Append("\n");
+                }
+
+                lbl_result.Text = matchedNumbersText.ToString();
+            }
             // 顯示開獎號碼
             // 格式化開獎號碼並分行顯示
             var formattedNumbers = selectedNumbers.Select(n => n < 10 ? $"0{n}" : n.ToString()).ToList();
@@ -142,12 +185,92 @@ namespace BingoBingo
 
             lbl_openNumbers.Text = displayText.ToString();
 
+            CheckSuperNumber(lastNumber);
+
+
+            // 確認使用者大小選擇與開獎結果是否一致，並顯示在 lbl_BigOrSmall
+            if (isBigSmall)
+            {
+                if (userBigSmallChoice == bigSmallResult)
+                {
+                    lbl_BigOrSmall.Text = $"猜大小的結果為：{bigSmallResult}\n恭喜中獎！";
+                }
+                else
+                {
+                    lbl_BigOrSmall.Text = $"猜大小的結果為：{bigSmallResult}\n很遺憾未中獎。";
+                }
+            }
+            else
+            {
+                lbl_BigOrSmall.Text = $"猜大小的開獎結果為：{bigSmallResult}";
+            }
+
+            // 確認使用者單雙選擇與開獎結果是否一致，並顯示在 lbl_OddOrEven
+            if (isOddEven)
+            {
+                if (userOddEvenChoice == oddEvenResult)
+                {
+                    lbl_OddOrEven.Text = $"猜單雙的結果為：{oddEvenResult}\n恭喜中獎！";
+                }
+                else
+                {
+                    lbl_OddOrEven.Text = $"猜單雙的結果為：{oddEvenResult}\n很遺憾未中獎。";
+                }
+            }
+            else
+            {
+                lbl_OddOrEven.Text = $"猜單雙的開獎結果為：{oddEvenResult}";
+            }
+
+            // 計算獎金
+            int matchedCount = userNumbers.Intersect(selectedNumbers).Count();
+            bool hasSuperNumberHit = isSuperNoSet && superNoInput == lastNumber;
+            bool isBigSmallMatch = isBigSmall && userBigSmallChoice == bigSmallResult;
+            bool isOddEvenMatch = isOddEven && userOddEvenChoice == oddEvenResult;
+            int stars = 0;
+            if (UserselectedNumbers.Count > 0)
+            {
+                stars = UserselectedNumbers.Count;
+            }
+            else
+                stars = Convert.ToInt32(cBox_computerchoose.SelectedItem);
+
+            int matchedNumberCount = userNumbers.Intersect(selectedNumbers).Count();
+
+            int prize = prizeManager.CalculatePrize(
+                UserselectedNumbers.Count,  // 星數是使用者選擇的號碼數
+                matchedCount,
+                isSuperNoSet,
+                isOddEven,
+                isBigSmall,
+                hasSuperNumberHit,
+                isBigSmallMatch,
+                isOddEvenMatch
+            );
+
+            lbl_CurrentPrize.Text = $"當局獎金：{prize} 元";
+            // 更新累積獎金
+            totalPrize += prize;
+            lbl_totalPrize.Text = $"累積獎金：{totalPrize} 元";
         }
-
-
+        private void CheckSuperNumber(int lastNumber)
+        {
+            if (isSuperNoSet)
+            {
+                if (superNoInput == lastNumber)
+                {
+                    lbl_superNo.Text = $"超級選號：{superNoInput} 號\n恭喜中獎！";
+                }
+                else
+                {
+                    lbl_superNo.Text = $"超級選號：{superNoInput} 號\n未中獎。";
+                }
+            }
+        }
 
         private void rBtn_choose_Click(object sender, EventArgs e)
         {
+            isNumberChosen = true; // 標記選擇了號碼
             userNumbers = new List<int>();
             UserselectedNumbers = new List<int>();
             lbl_yourInput.Text = $"你的選號：\n";
@@ -268,5 +391,77 @@ namespace BingoBingo
 
         }
 
+        private void rBtn_superNo_Click(object sender, EventArgs e)
+        {
+            // 確認超級選號
+            if (int.TryParse(txtBox_inputsuperNo.Text, out int checkSuperNo))
+            {
+                if (checkSuperNo >= 1 && checkSuperNo <= 80)
+                {
+                    superNoInput = checkSuperNo;
+                    isSuperNoSet = true;  // 設置超級號碼已設定
+                    MessageBox.Show($"超級選號已確認: {superNoInput}", "確認成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("輸入錯誤，請輸入1到80範圍內的數值", "範圍錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("請輸入有效的數字", "無效輸入", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            Console.WriteLine(superNoInput);
+        }
+
+        private void rBtn_BigSmall_Click(object sender, EventArgs e)
+        {
+            userBigSmallChoice = cBox_BigOrSmall.SelectedItem.ToString();
+            MessageBox.Show($"您選擇了猜大小: {userBigSmallChoice}", "確認選擇", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Console.WriteLine($"猜大小: {userBigSmallChoice}");
+            isBigSmall = true;
+  
+        }
+
+        private void rBtn_OddEven_Click(object sender, EventArgs e)
+        {
+
+            userOddEvenChoice = cBox_OddOrEven.SelectedItem.ToString();
+            MessageBox.Show($"您選擇了猜單雙: {userOddEvenChoice}", "確認選擇", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Console.WriteLine($"猜單雙: {userOddEvenChoice}");
+            isOddEven = true;  // 設置已選擇猜單雙
+        }
+
+        private void rBtn_computerchoose_Click(object sender, EventArgs e)
+        {
+            isNumberChosen = true;
+            if (cBox_computerchoose.SelectedItem == null)
+            {
+                MessageBox.Show("請先選擇星級。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 取得選擇的星級
+            int stars = Convert.ToInt32(cBox_computerchoose.SelectedItem);
+            GenerateRandomNumbers(stars);
+        }
+
+        private void GenerateRandomNumbers(int stars)
+        {
+            if (stars < 1 || stars > 10)
+            {
+                MessageBox.Show("選擇的星級必須在1到10之間。", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            List<int> randomNumbers = numberGenerator.GenerateNumbers(1, 80, stars);
+
+            UserselectedNumbers.Clear();
+            UserselectedNumbers.AddRange(randomNumbers);
+
+            UpdateSelectedNumbersDisplay();
+
+            MessageBox.Show($"系統已為您選擇了 {stars} 顆號碼：{string.Join(", ", randomNumbers)}", "選擇結果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

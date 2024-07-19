@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="NumberFormatter.cs" />
     <Compile Include="NumberGenerator.cs" />
+    <Compile Include="PrizeManager.cs" />
     <Compile Include="RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
